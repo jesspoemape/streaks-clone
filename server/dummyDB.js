@@ -1,5 +1,5 @@
 module.exports = {
-    "Users": [
+    "users": [
         {
             "id": 1,
             "username": "jaelarue",
@@ -21,7 +21,7 @@ module.exports = {
             "email": "coolguy@38.com"
         }
     ],
-    "Habits": [
+    "habits": [
         {
             "id": 1,
             "habit_name": "Read for ten minutes",
@@ -107,7 +107,7 @@ module.exports = {
             "current_streak_start_date": "2017-08-24T19:49:26.874Z"
         }
     ],
-    "CheckIns": [
+    "checkIns": [
         {
             "habit_id": 1,
             "checkin_at": ""

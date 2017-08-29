@@ -4,14 +4,15 @@ import ReactSVG from 'react-svg';
 
 import book from './../../assets/book.svg';
 
-const Habit = () => {
+const Habit = (props) => {
+    console.log(props);
     return (
         <Container>
             <HabitWrapper>
                 <Icon path={book}/>
                 <StreakLength>10</StreakLength>
             </HabitWrapper>
-            <Name>Read 10 minutes</Name>
+            <Name>{props.habit.habit_name}</Name>
         </Container>    
     );
 };
