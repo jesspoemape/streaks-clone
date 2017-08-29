@@ -4,15 +4,23 @@ import ReactSVG from 'react-svg';
 
 import book from './../../assets/book.svg';
 
-const Habit = (props) => {
-    console.log(props);
+const Habit = ({habit: {current_streak_start_date, habit_name}}) => {
+    let d = new Date(current_streak_start_date);
+    let cd = new Date();
+    let timeDiff = Math.abs(cd.getTime() - d.getTime());
+    let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+//     var date1 = new Date("7/13/2010");
+// var date2 = new Date("12/15/2010");
+// var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+// var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+
     return (
         <Container>
             <HabitWrapper>
                 <Icon path={book}/>
-                <StreakLength>10</StreakLength>
+                <StreakLength>{diffDays}</StreakLength>
             </HabitWrapper>
-            <Name>{props.habit.habit_name}</Name>
+            <Name>{habit_name}</Name>
         </Container>    
     );
 };
@@ -30,7 +38,7 @@ const HabitWrapper = styled.div`
     height: 125px;
     border-radius: 50%;
     border: 9px solid #70453B;
-    margin: 45px 25px 10px 25px;
+    margin: 30px 25px 10px 25px;
     display: flex;
     flex-direction: column;
     align-items: center;

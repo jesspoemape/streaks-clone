@@ -55,7 +55,7 @@ module.exports = {
             "habit_name": "Don't smoke",
             "date_created": "2017-07-24T19:49:26.874Z",
             "user_id": "1",
-            "current_streak_start_date": "2017-07-24T19:49:26.874Z"
+            "current_streak_start_date": "2017-08-28T19:49:26.874Z"
         },
         {
             "id": 6,
