@@ -11,7 +11,6 @@ class Home extends Component {
                 <Container>
                     <Label>What do you want to do everyday?</Label>
                     <Input />
-                    {/*<RemindMeToggle type='checkbox'/>*/}
                     <Button>Add Habit</Button>
                 </Container>
             </div>

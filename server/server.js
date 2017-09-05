@@ -10,6 +10,7 @@ massive(config.connectionString).then(db => app.set('db', db));
 
 //=========ENDPOINTS===========
 app.get('/api/getHabits/:userid', sc.getHabits);
+app.get('/api/getHabit/:habitid', sc.getHabit);
 
 
 

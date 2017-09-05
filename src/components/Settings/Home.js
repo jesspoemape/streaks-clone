@@ -20,7 +20,7 @@ class Home extends Component {
     }
 
 componentDidMount() {
-    axios.get('/api/getHabits/2').then(res => {
+    axios.get('/api/getHabits/1').then(res => {
         this.setState({habits: res.data})
     }).catch(console.error, "Error");
 }
@@ -31,12 +31,12 @@ render() {
             <Divider />
             <Container>
                 {this.state.habits.map(habit => {
-                    return (<Card key={habit.id}>
+                    return (<Link to={`/habit-detail/${habit.id}`} key={habit.id}><Card>
                         <IconContainer>
                             <Icon path={help} />
                         </IconContainer>
                         {habit.habit_name}
-                    </Card>)
+                    </Card></Link>)
                 })}
                 <Divider />
                 <Link to='/add-habit'><Card>
@@ -67,8 +67,8 @@ render() {
                 </Card>
             </Container>
         </div>
-    );
-}
+        );
+    }
 }
 
 export default Home;
