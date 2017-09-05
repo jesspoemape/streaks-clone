@@ -1,40 +1,44 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import moment from 'moment';
 
 class Home extends Component {
     constructor() {
         super();
         this.state={
-            habit: {}
+            habit: {},
+            checkinCount: null
         }
     }
 
 componentDidMount() {
     let habitid = this.props.match.params.id;
     axios.get(`/api/getHabit/${habitid}`).then(res => this.setState({habit: res.data[0]})).catch(console.error, 'Error');
+    axios.get(`/api/getCheckins/${habitid}`).then(res => this.setState({checkinCount: res.data})).catch(console.error, 'Error');
 }
 
     render() {
-        const {habit} = this.state;
-        let d = new Date(habit.date_created);
-        
+        const {habit, checkinCount} = this.state;
+        const d = moment(habit.date_created);
+        const cd = moment(new Date());
+        const allTimeAvg = (checkinCount/(cd.diff(d, 'days')))*100; 
 
         return (
             <Container>
                 <Name>{habit.habit_name}</Name>
-                <StartDate>Since {d.toDateString()}</StartDate>
+                <StartDate>Since {d.format('LL')}</StartDate>
                 <BasicStats>
                     <Stat>
                         12
                         <Label>Best Streak</Label>
                     </Stat>
                     <Stat>
-                        58.2%
+                        {`${allTimeAvg.toFixed(1)}%`}
                         <Label>All Time</Label>
                     </Stat>
                     <Stat>
-                        368
+                        {checkinCount ? checkinCount : 0}
                         <Label>Completions</Label>
                     </Stat>
                 </BasicStats>
