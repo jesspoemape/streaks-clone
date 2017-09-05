@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
+import Header from './../Shared/Header';
+
 class Home extends Component {
     render() {
         return (
-            <Container>
-                <Label>What do you want to do everyday?</Label>
-                <Input />
-                <Button>Add Habit</Button>
-            </Container>
+            <div>
+                <Header />
+                <Container>
+                    <Label>What do you want to do everyday?</Label>
+                    <Input />
+                    {/*<RemindMeToggle type='checkbox'/>*/}
+                    <Button>Add Habit</Button>
+                </Container>
+            </div>
+            
         );
     }
 }
@@ -21,6 +28,7 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    margin-top: 20px;
 `
 const Input = styled.input`
     width: 90%;
@@ -44,5 +52,10 @@ const Button = styled.button`
     width: 90%;
     margin: 20px;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1rem;
+    padding: 5px;
+`
+const RemindMeToggle = styled.input`
+    width: 20px;
+    height: 20px;
 `

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
+import {Link} from 'react-router-dom';
 
 import settings from './../../assets/settings.svg';
 import star from './../../assets/star.svg';
@@ -9,7 +10,7 @@ import star from './../../assets/star.svg';
 const Footer = () => {
     return (
         <Container>
-            <MenuItem path={settings}/>
+            <Link to='/settings'><MenuItem path={settings}/></Link>
             <AppName>Streaks.</AppName>
             <MenuItem path={star}/>
         </Container>
