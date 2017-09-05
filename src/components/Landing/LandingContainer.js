@@ -20,6 +20,7 @@ componentDidMount() {
 }
 
     render() {
+        console.log(this.state.habits);
         return (
             <div>
                 <Container>
