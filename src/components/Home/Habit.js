@@ -1,20 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
+import moment from 'moment';
 
 import book from './../../assets/book.svg';
 
 const Habit = ({habit: {current_streak_start_date, habit_name}}) => {
-    let d = new Date(current_streak_start_date);
-    let cd = new Date();
-    let timeDiff = Math.abs(cd.getTime() - d.getTime());
-    let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+
+    let cssd = moment(current_streak_start_date);
+    let cd = moment(new Date());
+    let streakLengthInDays = cd.diff(cssd, 'days');
     
     return (
         <Container>
             <HabitWrapper>
                 <Icon path={book}/>
-                <StreakLength>{diffDays}</StreakLength>
+                <StreakLength>{streakLengthInDays}</StreakLength>
             </HabitWrapper>
             <Name>{habit_name}</Name>
         </Container>    

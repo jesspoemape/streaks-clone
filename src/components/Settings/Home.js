@@ -20,7 +20,7 @@ class Home extends Component {
     }
 
 componentDidMount() {
-    axios.get('/api/getHabits/1').then(res => {
+    axios.get('/api/getHabits/2').then(res => {
         this.setState({habits: res.data})
     }).catch(console.error, "Error");
 }

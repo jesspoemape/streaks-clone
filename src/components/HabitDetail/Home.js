@@ -18,6 +18,8 @@ componentDidMount() {
     render() {
         const {habit} = this.state;
         let d = new Date(habit.date_created);
+        
+
         return (
             <Container>
                 <Name>{habit.habit_name}</Name>
