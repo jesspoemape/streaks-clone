@@ -16,7 +16,6 @@ export default Header;
 
 const Container = styled.div`
     background-color: #E56444;
-    box-shadow: 0px 3px 13px 0px rgba(191,191,191,1);
     height: 60px;
     width: 100%;
     display: flex;

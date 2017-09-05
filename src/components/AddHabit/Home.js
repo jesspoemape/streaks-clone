@@ -33,27 +33,26 @@ const Container = styled.div`
 const Input = styled.input`
     width: 90%;
     padding: 10px;
-    border: 2px solid #FF704C;
     font-size: 1.3rem;
     &:focus {
         outline: none;
     }
 `
 const Label = styled.p`
-    color: #aaaaaa;
+    color: white;
     margin: 10px 0;
     letter-spacing: .05rem; 
 `
 const Button = styled.button`
     border-radius: 5px;
-    background-color: #FF704C;
+    background-color: #7F3826;
     text-transform: uppercase;
     border: none;
-    width: 90%;
+    width: 50%;
     margin: 20px;
     color: white;
     font-size: 1rem;
-    padding: 5px;
+    padding: 15px;
 `
 const RemindMeToggle = styled.input`
     width: 20px;

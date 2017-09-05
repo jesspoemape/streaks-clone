@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 import notify from './../../assets/notify.svg';
 import plus from './../../assets/plus.svg';
@@ -38,12 +39,12 @@ render() {
                     </Card>)
                 })}
                 <Divider />
-                <Card>
+                <Link to='/add-habit'><Card>
                     <IconContainer>
                         <Icon path={plus} />
                     </IconContainer>
                     Add a habit
-                </Card>
+                </Card></Link>
                 <Divider />
                 <Card>
                     <IconContainer>
