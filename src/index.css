@@ -27,10 +27,11 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
   font-family: "Oswald";
   font-size: 16px;
-  background-color: #FF704C;
+  /*background-color: #FF704C;*/
+  width: 100%;
 }
 ol, ul {
 	list-style: none;

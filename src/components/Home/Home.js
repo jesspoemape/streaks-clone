@@ -45,4 +45,6 @@ const HabitsContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: left;
+    padding-bottom: 40px;
+    min-height: 629px;
 `

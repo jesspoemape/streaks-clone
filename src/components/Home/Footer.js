@@ -23,7 +23,7 @@ const Container = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 40px;
+    margin-top: 20px;
 `
 
 const MenuItem = styled(ReactSVG)`
