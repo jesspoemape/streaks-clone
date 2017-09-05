@@ -10,6 +10,7 @@ const Footer = () => {
     return (
         <Container>
             <MenuItem path={settings}/>
+            <AppName>Streaks.</AppName>
             <MenuItem path={star}/>
         </Container>
     );
@@ -28,4 +29,9 @@ const Container = styled.div`
 const MenuItem = styled(ReactSVG)`
     height: 35px;
     fill: #E4D8D6;
+`
+const AppName = styled.h3`
+    text-transform: uppercase;
+    font-weight: 500;
+    color: #70453B;
 `

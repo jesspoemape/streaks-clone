@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 import Habit from './Habit';
+import AddHabit from './AddHabit';
 import Footer from './Footer';
 
-class LandingContainer extends Component {
+class Home extends Component {
     constructor() {
         super();
         this.state={
@@ -14,20 +16,20 @@ class LandingContainer extends Component {
     }
 
 componentDidMount() {
-    axios.get('/api/getHabits/1').then(res => {
+    axios.get('/api/getHabits/2').then(res => {
         this.setState({habits: res.data})
     }).catch(console.error, "Error");
 }
 
     render() {
-        console.log(this.state.habits);
         return (
             <div>
-                <Container>
+                <HabitsContainer>
                     {this.state.habits.map(habit => {
                         return <Habit habit={habit} key={habit.id}/>
                     })}
-                </Container>
+                    {this.state.habits.length < 6 ? <Link to='/add-habit'><AddHabit /></Link>: null}
+                </HabitsContainer>
                 <Footer />
             </div>
             
@@ -35,12 +37,12 @@ componentDidMount() {
     }
 }
 
-export default LandingContainer;
+export default Home;
 
-const Container = styled.div`
+const HabitsContainer = styled.div`
     background: #FF704C;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: left;
 `

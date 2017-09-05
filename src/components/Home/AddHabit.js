@@ -2,21 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
 
-import book from './../../assets/book.svg';
+import plus from './../../assets/plus.svg';
 
-const Habit = ({habit: {current_streak_start_date, habit_name}}) => {
-    let d = new Date(current_streak_start_date);
-    let cd = new Date();
-    let timeDiff = Math.abs(cd.getTime() - d.getTime());
-    let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+const Habit = () => {
     
     return (
         <Container>
             <HabitWrapper>
-                <Icon path={book}/>
-                <StreakLength>{diffDays}</StreakLength>
+                <Icon path={plus}/>
             </HabitWrapper>
-            <Name>{habit_name}</Name>
+            <Name>Add a task</Name>
         </Container>    
     );
 };
@@ -27,6 +22,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 `
 
 const HabitWrapper = styled.div`
@@ -54,8 +50,4 @@ const Icon = styled(ReactSVG)`
     fill: white;
     height: 55px;
     margin-bottom: 5px;
-`
-const StreakLength = styled.h5`
-    font-size: .7rem;
-    color: #70453B;
 `

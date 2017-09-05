@@ -6,7 +6,7 @@ const sc = require('./setController');
 
 const app = express();
 app.use(bodyParser.json());
-massive(config.connectionString).then(db => app.set('db', db)).catch(console.error, "Error");
+massive(config.connectionString).then(db => app.set('db', db));
 
 //=========ENDPOINTS===========
 app.get('/api/getHabits/:userid', sc.getHabits);

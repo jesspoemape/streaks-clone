@@ -1,10 +1,13 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 
-import LandingContainer from './components/Landing/LandingContainer';
+import Home from './components/Home/Home';
+import AddHabit from './components/AddHabit/Home';
+
 
 export default (
     <Switch>
-        <Route exact path='/' component={LandingContainer}/>
+        <Route exact path='/' component={Home}/>
+        <Route path='/add-habit' component={AddHabit}/>
     </Switch>
 );
