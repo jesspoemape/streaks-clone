@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import ReactSVG from 'react-svg';
 import axios from 'axios';
 import moment from 'moment';
+
+import book from './../../assets/book.svg';
 
 class Home extends Component {
     constructor() {
@@ -26,15 +29,18 @@ componentDidMount() {
 
         return (
             <Container>
-                <Name>{habit.habit_name}</Name>
-                <StartDate>Since {d.format('LL')}</StartDate>
+                <IconContainer>
+                    <Icon path={book}/>
+                </IconContainer>
+                <Name>{habit.habit_name ? habit.habit_name : 'habit name'}</Name>
+                {/*<StartDate>Since {d.format('LL')}</StartDate>*/}
                 <BasicStats>
                     <Stat>
                         12
                         <Label>Best Streak</Label>
                     </Stat>
                     <Stat>
-                        {`${allTimeAvg.toFixed(1)}%`}
+                        {allTimeAvg ? `${allTimeAvg.toFixed(1)}%` : '0%'}
                         <Label>All Time</Label>
                     </Stat>
                     <Stat>
@@ -52,14 +58,29 @@ export default Home;
 const Container = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
+    padding-top: 25px;
 `
-const Name = styled.div`
-    color: white;
-    font-size: 1.5rem;
+const IconContainer = styled.div`
+    background-color: white;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 50px;
+`
+const Icon = styled(ReactSVG)`
+    fill: #5e1200;
+    width: 50px;
+`
+const Name = styled.div`
+    color: white;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
     text-transform: uppercase;
 `
 const StartDate = styled.div`
@@ -72,9 +93,10 @@ const StartDate = styled.div`
     text-transform: uppercase;
 `
 const BasicStats = styled.div`
+    width: 100%;
     border-top: 1px solid #c95538;
     height: 50px;
-    margin-top: 20px;
+    margin-top: 30px;
     padding: 20px;
     display: flex;
     justify-content: space-around;
