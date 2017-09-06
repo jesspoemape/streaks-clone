@@ -5,6 +5,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 import book from './../../assets/book.svg';
+import StatsOverTime from './StatsOverTime';
 
 class Home extends Component {
     constructor() {
@@ -24,8 +25,10 @@ componentDidMount() {
     render() {
         const {habit, checkinCount} = this.state;
         const d = moment(habit.date_created);
+        const cssd = moment(habit.current_streak_start_date);
         const cd = moment(new Date());
         const allTimeAvg = (checkinCount/(cd.diff(d, 'days')))*100; 
+        let streakLengthInDays = cd.diff(cssd, 'days');
 
         return (
             <Container>
@@ -33,10 +36,9 @@ componentDidMount() {
                     <Icon path={book}/>
                 </IconContainer>
                 <Name>{habit.habit_name ? habit.habit_name : 'habit name'}</Name>
-                {/*<StartDate>Since {d.format('LL')}</StartDate>*/}
                 <BasicStats>
                     <Stat>
-                        12
+                        {streakLengthInDays ? streakLengthInDays : 0}
                         <Label>Best Streak</Label>
                     </Stat>
                     <Stat>
@@ -48,6 +50,7 @@ componentDidMount() {
                         <Label>Completions</Label>
                     </Stat>
                 </BasicStats>
+                <StatsOverTime />
             </Container>
         );
     }
