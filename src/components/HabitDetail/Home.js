@@ -6,6 +6,7 @@ import moment from 'moment';
 
 import book from './../../assets/book.svg';
 import StatsOverTime from './StatsOverTime';
+import BasicStats from './BasicStats';
 
 class Home extends Component {
     constructor() {
@@ -36,20 +37,7 @@ componentDidMount() {
                     <Icon path={book}/>
                 </IconContainer>
                 <Name>{habit.habit_name ? habit.habit_name : 'habit name'}</Name>
-                <BasicStats>
-                    <Stat>
-                        {streakLengthInDays ? streakLengthInDays : 0}
-                        <Label>Best Streak</Label>
-                    </Stat>
-                    <Stat>
-                        {allTimeAvg ? `${allTimeAvg.toFixed(1)}%` : '0%'}
-                        <Label>All Time</Label>
-                    </Stat>
-                    <Stat>
-                        {checkinCount ? checkinCount : 0}
-                        <Label>Completions</Label>
-                    </Stat>
-                </BasicStats>
+                <BasicStats streakLengthInDays={streakLengthInDays} allTimeAvg={allTimeAvg} checkinCount={checkinCount}/>
                 <StatsOverTime />
             </Container>
         );
@@ -67,8 +55,8 @@ const Container = styled.div`
 const IconContainer = styled.div`
     background-color: white;
     border-radius: 50%;
-    height: 100px;
-    width: 100px;
+    height: 120px;
+    width: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,41 +67,11 @@ const Icon = styled(ReactSVG)`
 `
 const Name = styled.div`
     color: white;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 15px 0;
     text-transform: uppercase;
-`
-const StartDate = styled.div`
-    color: white;
-    font-size: 1.2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 20px;
-    text-transform: uppercase;
-`
-const BasicStats = styled.div`
-    width: 100%;
-    border-top: 1px solid #c95538;
-    height: 50px;
-    margin-top: 30px;
-    padding: 20px;
-    display: flex;
-    justify-content: space-around;
-`
-const Stat = styled.div`
-    color: white;
-    font-size: 1.2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-`
-const Label = styled.h4`
-    text-transform: uppercase;
-    font-size: .7rem;
-    padding-top: 5px;
-    letter-spacing: 1px;
 `
