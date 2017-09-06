@@ -25,11 +25,12 @@ componentDidMount() {
 
     render() {
         const {habit, checkinCount} = this.state;
-        const d = moment(habit.date_created);
-        const cssd = moment(habit.current_streak_start_date);
-        const cd = moment(new Date());
-        const allTimeAvg = (checkinCount/(cd.diff(d, 'days')))*100; 
-        let streakLengthInDays = cd.diff(cssd, 'days');
+        const startDate = moment(habit.date_created).format('ll');
+        const currentStreakStartDate = moment(habit.current_streak_start_date);
+        const currentDate = moment();
+        const allTimeAvg = (checkinCount/(currentDate.diff(startDate, 'days')))*100; 
+        const streakLengthInDays = currentDate.diff(currentStreakStartDate, 'days');
+        const totalDays = currentDate.diff(startDate, 'days');
 
         return (
             <Container>
@@ -38,7 +39,7 @@ componentDidMount() {
                 </IconContainer>
                 <Name>{habit.habit_name ? habit.habit_name : 'habit name'}</Name>
                 <BasicStats streakLengthInDays={streakLengthInDays} allTimeAvg={allTimeAvg} checkinCount={checkinCount}/>
-                <StatsOverTime />
+                <StatsOverTime startDate={startDate} totalDays={totalDays}/>
             </Container>
         );
     }

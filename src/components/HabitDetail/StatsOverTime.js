@@ -3,7 +3,7 @@ import {Line} from 'react-chartjs-2';
 import styled from 'styled-components';
 
 const data = {
-  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', "Sep", 'Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'],
+  labels: ['⃓', '⃓','⃓','⃓','⃓','⃓','⃓','⃓','⃓','⃓','⃓','⃓','⃓','⃓','⃓'],
   datasets: [
     {
       fill: 'origin',
@@ -35,7 +35,7 @@ const options = {
             display: false
         }],
         xAxes: [{
-            display: false,
+            // display: false,
             gridLines: {
                 display: false
             }
@@ -47,13 +47,13 @@ const options = {
     maintainAspectRatio: false
 };
 
-const StatsOverTime = () => {
+const StatsOverTime = ({startDate, totalDays}) => {
     return (
         <Container>
             <Line data={data} options={options} width={375} height={75}/>
             <LabelsContainer>
-                <Label>Jan 15, 2017</Label>
-                <Label>192 Days</Label>
+                <Label>{startDate ? startDate : 'Start Date'}</Label>
+                <Label>{totalDays ? `${totalDays} Days` : '0 Days'}</Label>
                 <Label>Today</Label>
             </LabelsContainer>
       </Container>

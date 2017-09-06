@@ -53,7 +53,3 @@ const Button = styled.button`
     font-size: 1rem;
     padding: 15px;
 `
-const RemindMeToggle = styled.input`
-    width: 20px;
-    height: 20px;
-`
