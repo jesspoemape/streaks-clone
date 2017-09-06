@@ -7,6 +7,8 @@ import moment from 'moment';
 import book from './../../assets/book.svg';
 import StatsOverTime from './StatsOverTime';
 import BasicStats from './BasicStats';
+import StatsByDay from './StatsByDay';
+import StatsByTime from './StatsByTime';
 
 class Home extends Component {
     constructor() {
@@ -40,6 +42,12 @@ componentDidMount() {
                 <Name>{habit.habit_name ? habit.habit_name : 'habit name'}</Name>
                 <BasicStats streakLengthInDays={streakLengthInDays} allTimeAvg={allTimeAvg} checkinCount={checkinCount}/>
                 <StatsOverTime startDate={startDate} totalDays={totalDays}/>
+                <Label>Completions</Label>
+                <StatsContainer>
+                    
+                    <StatsByDay />
+                    <StatsByTime />
+                </StatsContainer>
             </Container>
         );
     }
@@ -75,4 +83,16 @@ const Name = styled.div`
     align-items: center;
     padding: 15px 0;
     text-transform: uppercase;
+`
+const Label = styled.h5`
+    text-transform: uppercase;
+    font-size: .7rem;
+    padding-top: 5px;
+    letter-spacing: 1px;
+    color: #fcd6cc;
+`
+const StatsContainer = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
 `
