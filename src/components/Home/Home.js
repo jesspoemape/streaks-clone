@@ -11,9 +11,12 @@ class Home extends Component {
     constructor() {
         super();
         this.state={
-            habits: []
+            habits: [],
+            isMouseInside: false
         }
         this.handleClick = this.handleClick.bind(this);
+        this.mouseEnter = this.mouseEnter.bind(this);
+        this.mouseExit = this.mouseExit.bind(this);
     }
 
 componentDidMount() {
@@ -24,17 +27,23 @@ componentDidMount() {
 
 handleClick(habitId) {
     const now = new Date();
-    console.log('HABIT ID',habitId);
-    console.log('FIRED');
     // axios.post(`./api/checkIn/${habitId}`, now).then(res => res).catch(console.error, 'Error');
 }
 
+mouseEnter() {
+    this.setState({isMouseInside: true});
+}
+mouseExit () {
+    this.setState({isMouseInside: false});
+}
+
     render() {
+        const {habits, isMouseInside} = this.state;
         return (
             <div>
                 <HabitsContainer>
-                    {this.state.habits.map(habit => {
-                        return <Habit habit={habit} key={habit.id} handleClick={this.handleClick}/>
+                    {habits.map(habit => {
+                        return <Habit habit={habit} key={habit.id} handleClick={this.handleClick} mouseEnter={this.mouseEnter} mouseExit={this.mouseExit} hovered={isMouseInside}/>
                     })}
                     {this.state.habits.length < 6 ? <Link to='/add-habit'><AddHabit /></Link>: null}
                 </HabitsContainer>
