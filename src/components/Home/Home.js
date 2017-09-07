@@ -11,12 +11,9 @@ class Home extends Component {
     constructor() {
         super();
         this.state={
-            habits: [],
-            isMouseInside: false
+            habits: []
         }
         this.handleClick = this.handleClick.bind(this);
-        this.mouseEnter = this.mouseEnter.bind(this);
-        this.mouseExit = this.mouseExit.bind(this);
     }
 
 componentDidMount() {
@@ -43,7 +40,7 @@ mouseExit () {
             <div>
                 <HabitsContainer>
                     {habits.map(habit => {
-                        return <Habit habit={habit} key={habit.id} handleClick={this.handleClick} mouseEnter={this.mouseEnter} mouseExit={this.mouseExit} hovered={isMouseInside}/>
+                        return <Habit habit={habit} key={habit.id} handleClick={this.handleClick}/>
                     })}
                     {this.state.habits.length < 6 ? <Link to='/add-habit'><AddHabit /></Link>: null}
                 </HabitsContainer>

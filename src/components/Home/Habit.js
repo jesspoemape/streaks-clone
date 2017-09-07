@@ -4,22 +4,20 @@ import ReactSVG from 'react-svg';
 import moment from 'moment';
 
 import book from './../../assets/book.svg';
-import OnHover from './OnHover';
 
-const Habit = ({habit: {current_streak_start_date, habit_name, id}, handleClick, mouseEnter, mouseExit, hovered}) => {
+const Habit = ({habit: {current_streak_start_date, habit_name, id}, handleClick}) => {
 
     let cssd = moment(current_streak_start_date);
     let cd = moment(new Date());
     let streakLengthInDays = cd.diff(cssd, 'days');
     
     return (
-        <Container onClick={() => handleClick(id)} onMouseEnter={mouseEnter} onMouseLeave={mouseExit}>
+        <Container onClick={() => handleClick(id)}>
             <HabitWrapper>
                 <Icon path={book}/>
                 <StreakLength>{streakLengthInDays}</StreakLength>
             </HabitWrapper>
             <Name>{habit_name}</Name>
-            {hovered ? <OnHover /> : null}
         </Container>    
     );
 };
