@@ -5,14 +5,14 @@ import moment from 'moment';
 
 import book from './../../assets/book.svg';
 
-const Habit = ({habit: {current_streak_start_date, habit_name}}) => {
+const Habit = ({habit: {current_streak_start_date, habit_name, id}, handleClick}) => {
 
     let cssd = moment(current_streak_start_date);
     let cd = moment(new Date());
     let streakLengthInDays = cd.diff(cssd, 'days');
     
     return (
-        <Container>
+        <Container onClick={() => handleClick(id)}>
             <HabitWrapper>
                 <Icon path={book}/>
                 <StreakLength>{streakLengthInDays}</StreakLength>

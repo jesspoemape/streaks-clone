@@ -24,7 +24,7 @@ const data = {
       pointHoverBorderWidth: 2,
       pointRadius: 2,
       pointHitRadius: 10,
-      data: [100, 59, 80, 81, 56, 55, 40, 45, 23]
+      data: [0.1, 0.1, 0.1, 1, 4, 6, 5, 4, 1]
     }
   ]
 };

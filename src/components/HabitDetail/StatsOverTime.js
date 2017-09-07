@@ -65,7 +65,8 @@ export default StatsOverTime;
 const Container = styled.div`
     border-top: 2px solid #ff987c;
     border-bottom: 2px solid #ff987c;
-    padding: 15px;
+    padding: 10px;
+    margin-bottom: 5px;
 `
 const LabelsContainer = styled.div`
     display: flex;

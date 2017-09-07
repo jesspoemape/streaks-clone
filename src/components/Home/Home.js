@@ -13,6 +13,7 @@ class Home extends Component {
         this.state={
             habits: []
         }
+        this.handleClick = this.handleClick.bind(this);
     }
 
 componentDidMount() {
@@ -21,12 +22,19 @@ componentDidMount() {
     }).catch(console.error, "Error");
 }
 
+handleClick(habitId) {
+    const now = new Date();
+    console.log('HABIT ID',habitId);
+    console.log('FIRED');
+    // axios.post(`./api/checkIn/${habitId}`, now).then(res => res).catch(console.error, 'Error');
+}
+
     render() {
         return (
             <div>
                 <HabitsContainer>
                     {this.state.habits.map(habit => {
-                        return <Habit habit={habit} key={habit.id}/>
+                        return <Habit habit={habit} key={habit.id} handleClick={this.handleClick}/>
                     })}
                     {this.state.habits.length < 6 ? <Link to='/add-habit'><AddHabit /></Link>: null}
                 </HabitsContainer>
