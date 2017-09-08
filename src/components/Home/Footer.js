@@ -4,7 +4,7 @@ import ReactSVG from 'react-svg';
 import {Link} from 'react-router-dom';
 
 import settings from './../../assets/settings.svg';
-import star from './../../assets/star.svg';
+import calendar from './../../assets/calendar.svg';
 
 
 const Footer = () => {
@@ -12,7 +12,7 @@ const Footer = () => {
         <Container>
             <Link to='/settings'><MenuItem path={settings}/></Link>
             <AppName>Streaks.</AppName>
-            <MenuItem path={star}/>
+            <MenuItem path={calendar}/>
         </Container>
     );
 };
@@ -28,7 +28,7 @@ const Container = styled.div`
 `
 
 const MenuItem = styled(ReactSVG)`
-    height: 35px;
+    width: 35px;
     fill: #E4D8D6;
 `
 const AppName = styled.h3`

@@ -2,15 +2,25 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 
 import Header from './../Shared/Header';
+import Days from './Days';
 
 class Home extends Component {
+    constructor() {
+        super();
+
+        this.state={
+            selectedDays: []
+        }
+    }
+
     render() {
         return (
             <div>
-                <Header />
+                <Header title={'Add a habit'}/>
                 <Container>
-                    <Label>What do you want to do everyday?</Label>
+                    <Label>Enter habit name.</Label>
                     <Input />
+                    <Days days={['M', 'W', 'F']}/>
                     <Button>Add Habit</Button>
                 </Container>
             </div>
@@ -32,6 +42,7 @@ const Container = styled.div`
 const Input = styled.input`
     width: 90%;
     padding: 10px;
+    margin-bottom: 50px;
     font-size: 1.3rem;
     &:focus {
         outline: none;

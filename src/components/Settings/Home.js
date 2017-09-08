@@ -27,7 +27,7 @@ componentDidMount() {
 render() {
     return (
         <div>
-            <Header />
+            <Header title={'Settings'}/>
             <Divider />
             <Container>
                 {this.state.habits.map(habit => {

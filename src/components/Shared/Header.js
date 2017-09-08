@@ -4,10 +4,11 @@ import ReactSVG from 'react-svg';
 
 import back from './../../assets/back.svg';
 
-const Header = () => {
+const Header = ({title}) => {
     return (
         <Container>
             <BackArrow path={back}/>
+            <Title>{title}</Title>
         </Container>
     );
 };
@@ -20,10 +21,21 @@ const Container = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding-left: 15px;
+    position: relative;
 `
 const BackArrow = styled(ReactSVG)`
     stroke: white;
     fill: white;
     width: 25px;
+    position: absolute;
+    left: 15px;
+    top: 19px;
+`
+const Title = styled.h2`
+    font-size: 1.5rem;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 `
