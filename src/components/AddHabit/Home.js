@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import moment from 'moment';
+import {Link} from 'react-router-dom';
 
 import Header from './../Shared/Header';
 import Days from './Days';
@@ -20,9 +21,14 @@ class Home extends Component {
     }
 
     addDay(day) {
-        this.setState({
-            selectedDays: [...this.state.selectedDays, day]
-        })
+        if (this.state.selectedDays.includes(day)) {
+            return this.state.selectedDays;
+        }
+        else {
+            this.setState({
+                selectedDays: [...this.state.selectedDays, day]
+            });
+        }
     }
 
     handleChange(e) {
@@ -50,7 +56,7 @@ class Home extends Component {
                     <Label>Enter habit name.</Label>
                     <Input value={userInput} onChange={e => this.handleChange(e)}/>
                     <Days days={selectedDays} addDay={this.addDay} />
-                    <Button onClick={this.addHabit}>Add Habit</Button>
+                    <Link to='/'><Button onClick={this.addHabit}>Add Habit</Button></Link>
                 </Container>
             </div>
             
@@ -87,9 +93,8 @@ const Button = styled.button`
     background-color: #7F3826;
     text-transform: uppercase;
     border: none;
-    width: 50%;
-    margin: 20px;
     color: white;
     font-size: 1rem;
     padding: 15px;
+    width: 225px;
 `

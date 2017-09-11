@@ -5,17 +5,17 @@ const Days = ({days, addDay}) => {
     return (
         <MainContainer>
             <LabelContainer>
-                <Label>Task days:</Label>
-                <Label>{days.toString()}</Label>
+                <Label>Task days: </Label>
+                <Label> {days.toString()}</Label>
             </LabelContainer>
             <DaysContainer>
-                <Day onClick={() => addDay('S')}>S</Day>
+                <Day onClick={() => addDay('Su')}>Su</Day>
                 <Day onClick={() => addDay('M')}>M</Day>
-                <Day onClick={() => addDay('T')}>T</Day>
+                <Day onClick={() => addDay('Tu')}>Tu</Day>
                 <Day onClick={() => addDay('W')}>W</Day>
-                <Day onClick={() => addDay('T')}>T</Day>
+                <Day onClick={() => addDay('Th')}>Th</Day>
                 <Day onClick={() => addDay('F')}>F</Day>
-                <Day onClick={() => addDay('S')}>S</Day>
+                <Day onClick={() => addDay('Sa')}>Sa</Day>
             </DaysContainer>
         </MainContainer>
     );
@@ -31,6 +31,7 @@ const MainContainer = styled.div`
 `
 const LabelContainer = styled.div`
     display: flex;
+    justify-content: space-between;
     padding: 10px 40px;
 `
 const Label = styled.h5`
