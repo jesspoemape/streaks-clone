@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import moment from 'moment';
 
 import Header from './../Shared/Header';
 import Days from './Days';
@@ -9,19 +11,46 @@ class Home extends Component {
         super();
 
         this.state={
-            selectedDays: []
+            selectedDays: [],
+            userInput: ""
         }
+        this.addDay = this.addDay.bind(this);
+        this.handleChange= this.handleChange.bind(this);
+        this.addHabit = this.addHabit.bind(this);
+    }
+
+    addDay(day) {
+        this.setState({
+            selectedDays: [...this.state.selectedDays, day]
+        })
+    }
+
+    handleChange(e) {
+        this.setState({
+            userInput: e.target.value
+        });
+    }
+    addHabit() {
+        axios.post('/api/addHabit', {
+            habit_name: this.state.userInput,
+            date_created: moment(),
+            user_id: 3,
+            current_streak_start_date: moment() 
+        })
+        .then(res => res)
+        .catch(console.error, 'Error');
     }
 
     render() {
+        const {userInput, selectedDays} = this.state;
         return (
             <div>
                 <Header title={'Add a habit'}/>
                 <Container>
                     <Label>Enter habit name.</Label>
-                    <Input />
-                    <Days days={['M', 'W', 'F']}/>
-                    <Button>Add Habit</Button>
+                    <Input value={userInput} onChange={e => this.handleChange(e)}/>
+                    <Days days={selectedDays} addDay={this.addDay} />
+                    <Button onClick={this.addHabit}>Add Habit</Button>
                 </Container>
             </div>
             

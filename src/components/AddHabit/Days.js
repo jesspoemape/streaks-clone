@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Days = ({days}) => {
+const Days = ({days, addDay}) => {
     return (
         <MainContainer>
             <LabelContainer>
@@ -9,13 +9,13 @@ const Days = ({days}) => {
                 <Label>{days.toString()}</Label>
             </LabelContainer>
             <DaysContainer>
-                <Day>S</Day>
-                <Day>M</Day>
-                <Day>T</Day>
-                <Day>W</Day>
-                <Day>T</Day>
-                <Day>F</Day>
-                <Day>S</Day>
+                <Day onClick={() => addDay('S')}>S</Day>
+                <Day onClick={() => addDay('M')}>M</Day>
+                <Day onClick={() => addDay('T')}>T</Day>
+                <Day onClick={() => addDay('W')}>W</Day>
+                <Day onClick={() => addDay('T')}>T</Day>
+                <Day onClick={() => addDay('F')}>F</Day>
+                <Day onClick={() => addDay('S')}>S</Day>
             </DaysContainer>
         </MainContainer>
     );
@@ -31,8 +31,7 @@ const MainContainer = styled.div`
 `
 const LabelContainer = styled.div`
     display: flex;
-    justify-content: space-evenly;
-    padding: 10px 0;
+    padding: 10px 40px;
 `
 const Label = styled.h5`
     text-transform: uppercase;
@@ -47,8 +46,8 @@ const DaysContainer = styled.div`
 `
 const Day = styled.div`
     background-color: #E56544;
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     display: flex;
     justify-content: center;

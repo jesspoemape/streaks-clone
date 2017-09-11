@@ -12,5 +12,9 @@ module.exports={
     getCheckins: (req, res) => {
         const db = req.app.get('db');
         db.check_ins.count({habit_id: req.params.habitid}).then(total => res.status(200).send(total)).catch(console.error, 'Error');
+    },
+    addHabit: (req, res) => {
+        const db = req.app.get('db');
+        db.habits.insert(req.body).then(response => res.status(200).send('Habit successfully added')).catch(console.error, 'Error');
     }
 }

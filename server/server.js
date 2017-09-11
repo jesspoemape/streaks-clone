@@ -13,6 +13,8 @@ app.get('/api/getHabits/:userid', sc.getHabits);
 app.get('/api/getHabit/:habitid', sc.getHabit);
 app.get('/api/getCheckins/:habitid', sc.getCheckins);
 
+app.post('/api/addHabit', sc.addHabit);
+
 
 
 app.listen(3001, () => console.log('Listening on port 3001'));
