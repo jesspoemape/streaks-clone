@@ -19,10 +19,6 @@ module.exports={
     },
     checkStreaks: (req, res) => {
         // get active habits based on user
-        // map through habits and check if last checkin was exactly one day ago
-        // if so, do nothing
-        // if not, reset the current streak start date
-
         const db = req.app.get('db');
 
         db.run(`select current_streak_start_date, checkin_at, habit_id from habits join 
@@ -35,8 +31,17 @@ module.exports={
     updateStreakStartDate: (req, res) => {
         const db = req.app.get('db');
         const {today, checkInsToChange} = req.body;
-        // db.run(`update habits set current_streak_start_date = ${today} where id = any(array${checkInsToChange})`)
+        db.habits.update({id: checkInsToChange, current_streak_start_date: today})
+            .then(response => res.status(200).send(response))
+            .catch(console.error, 'Error');
+    },
+    checkIn: (req, res) => {
+        const db = req.app.get('db');
+        const {habitid} = req.params;
+        const {today} = req.body;
 
-        db.habits.update({id: checkInsToChange, current_streak_start_date: today}).then(res => res).catch(console.error, 'Error');
+        db.check_ins.insert({habit_id: habitid, checkin_at: today})
+            .then(response => res.status(200).send(response))
+            .catch(console.error, 'Error');
     }
 }

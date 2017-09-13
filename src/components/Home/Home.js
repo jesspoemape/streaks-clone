@@ -20,6 +20,10 @@ class Home extends Component {
 
 componentWillMount() {
     // check streaks for user by id
+    // loop through habits and check if last checkin was exactly one day ago
+    // if so, do nothing
+    // if not, reset the current streak start date
+
     const {today} = this.state;
     axios.get(`api/checkStreaks/${2}`).then(res => {
         const checkInsToChange = [];
@@ -30,7 +34,7 @@ componentWillMount() {
             }
         });
         
-        // send checkinstochange info back to database to update the currentstreskatartdates
+        // send reset the current streak start date
         if (checkInsToChange.length > 0) {
             axios.put(`/api/updateStreakStartDate`, {checkInsToChange, today})
             .then(res => {
@@ -50,7 +54,8 @@ componentDidMount() {
 }
 
 handleClick(habitId) {
-    // axios.post(`./api/checkIn/${habitId}`, now).then(res => res).catch(console.error, 'Error');
+    const {today} = this.state;
+    axios.post(`/api/checkIn/${habitId}`, {today}).then(res => res).catch(console.error, 'Error');
 }
 
     render() {
