@@ -2,29 +2,20 @@ import React from 'react';
 import {Bar} from 'react-chartjs-2';
 import styled from 'styled-components';
 
-const data = {
-  labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-  datasets: [
-    {
-      backgroundColor: 'black',
-      borderColor: 'white',
-      borderCapStyle: 'round',
-      barThickness: 0,
-      borderWidth: 4,
-      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-      hoverBorderColor: 'rgba(255,99,132,1)',
-      data: [85, 59, 80, 81, 56, 55, 12]
-    }
-  ]
-};
 
 const options = {
     scales: {
         yAxes: [{
+            ticks: {
+                beginAtZero: true
+            },
             display: false
         }],
         xAxes: [{
-            // display: false,
+            ticks: {
+                fontColor: 'white',
+                fontFamily: 'Oswald'
+            },
             gridLines: {
                 display: false
             }
@@ -36,7 +27,26 @@ const options = {
     maintainAspectRatio: false
 };
 
-const StatsByDay = () => {
+const StatsByDay = ({stats}) => {
+    const dataArr = [];
+    for (let day in stats) {
+        dataArr.push(stats[day]);
+    }
+
+const data = {
+  labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+  datasets: [
+    {
+      backgroundColor: 'white',
+      borderColor: 'white',
+      barThickness: 1,
+      borderWidth: 0,
+      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+      hoverBorderColor: 'rgba(255,99,132,1)',
+      data: dataArr
+    }
+  ]
+};
     return (
         <div>
         <Bar

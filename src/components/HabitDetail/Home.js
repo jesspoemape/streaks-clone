@@ -15,11 +15,13 @@ class Home extends Component {
         super();
         this.state={
             habit: {},
-            checkinCount: null,
-            checkins: null,
-            checkInsByDay: null,
-            checkInsByHour: null
+            checkinCount: 0,
+            checkins: [],
+            checkInsByDay: [],
+            checkInsByHour: []
         }
+
+        this.countOccurences = this.countOccurences.bind(this);
     }
 
 componentDidMount() {
@@ -42,10 +44,15 @@ componentDidMount() {
         });
         this.setState({checkInsByHour});
 
-    }).catch(console.error, 'Error');
+    }).catch(console.error, 'Error');   
+}
 
-
-    
+countOccurences(arr) {
+    const obj = {};
+    for (var i = 0; i < arr.length; i++) {
+        obj[arr[i]] = (obj[arr[i]] || 0) + 1;
+    }
+    return obj;
 }
 
     render() {
@@ -56,6 +63,9 @@ componentDidMount() {
         const allTimeAvg = (checkinCount/(currentDate.diff(startDate, 'days')))*100; 
         const streakLengthInDays = currentDate.diff(currentStreakStartDate, 'days');
         const totalDays = currentDate.diff(startDate, 'days');
+        const statsByDayObj = this.countOccurences(checkInsByDay);
+        const statsByTimeObj = this.countOccurences(checkInsByHour);;
+
         return (
             <Container>
                 <IconContainer>
@@ -66,8 +76,8 @@ componentDidMount() {
                 <StatsOverTime startDate={startDate} totalDays={totalDays}/>
                 <Label>Completions</Label>
                 <StatsContainer>
-                    <StatsByDay statsByDay={checkInsByDay}/>
-                    <StatsByTime checkInsByHour={checkInsByHour}/>
+                    <StatsByDay stats={statsByDayObj}/>
+                    <StatsByTime stats={statsByTimeObj}/>
                 </StatsContainer>
             </Container>
         );
