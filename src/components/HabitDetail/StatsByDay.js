@@ -3,7 +3,7 @@ import {Bar} from 'react-chartjs-2';
 import styled from 'styled-components';
 
 const data = {
-  labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+  labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
   datasets: [
     {
       backgroundColor: 'black',

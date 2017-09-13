@@ -15,25 +15,47 @@ class Home extends Component {
         super();
         this.state={
             habit: {},
-            checkinCount: null
+            checkinCount: null,
+            checkins: null,
+            checkInsByDay: null,
+            checkInsByHour: null
         }
     }
 
 componentDidMount() {
     let habitid = this.props.match.params.id;
     axios.get(`/api/getHabit/${habitid}`).then(res => this.setState({habit: res.data[0]})).catch(console.error, 'Error');
-    axios.get(`/api/getCheckins/${habitid}`).then(res => this.setState({checkinCount: res.data})).catch(console.error, 'Error');
+    axios.get(`/api/getCheckins/${habitid}`)
+    .then(res => {
+        // for number of completions
+        this.setState({checkinCount: res.data.length, checkins: res.data});
+
+        // for checkins by day
+        const checkInsByDay = this.state.checkins.map(checkin => {
+            return moment(checkin.checkin_at).day();
+        });
+        this.setState({checkInsByDay});
+
+        // for checkins by hour
+        const checkInsByHour = this.state.checkins.map(checkin => {
+            return moment(checkin.checkin_at).hour();
+        });
+        this.setState({checkInsByHour});
+
+    }).catch(console.error, 'Error');
+
+
+    
 }
 
     render() {
-        const {habit, checkinCount} = this.state;
+        const {habit, checkinCount, checkInsByDay, checkInsByHour} = this.state;
         const startDate = moment(habit.date_created).format('ll');
         const currentStreakStartDate = moment(habit.current_streak_start_date);
         const currentDate = moment();
         const allTimeAvg = (checkinCount/(currentDate.diff(startDate, 'days')))*100; 
         const streakLengthInDays = currentDate.diff(currentStreakStartDate, 'days');
         const totalDays = currentDate.diff(startDate, 'days');
-
         return (
             <Container>
                 <IconContainer>
@@ -44,9 +66,8 @@ componentDidMount() {
                 <StatsOverTime startDate={startDate} totalDays={totalDays}/>
                 <Label>Completions</Label>
                 <StatsContainer>
-                    
-                    <StatsByDay />
-                    <StatsByTime />
+                    <StatsByDay statsByDay={checkInsByDay}/>
+                    <StatsByTime checkInsByHour={checkInsByHour}/>
                 </StatsContainer>
             </Container>
         );

@@ -3,7 +3,7 @@ import {Line} from 'react-chartjs-2';
 import styled from 'styled-components';
 
 const data = {
-  labels: ['⃓', '⃓','⃓','⃓','⃓','⃓','⃓','⃓','⃓','⃓','⃓','⃓','⃓','⃓','⃓'],
+  labels: ["","","","","","","","","","","","","","",""],
   datasets: [
     {
       fill: 'origin',

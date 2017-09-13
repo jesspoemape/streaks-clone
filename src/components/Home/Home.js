@@ -13,7 +13,8 @@ class Home extends Component {
         super();
         this.state={
             habits: [],
-            today: moment()
+            today: moment(),
+            wasClicked: false
         }
         this.handleClick = this.handleClick.bind(this);
     }
@@ -54,17 +55,18 @@ componentDidMount() {
 }
 
 handleClick(habitId) {
-    const {today} = this.state;
-    axios.post(`/api/checkIn/${habitId}`, {today}).then(res => res).catch(console.error, 'Error');
+    // const {today} = this.state;
+    // axios.post(`/api/checkIn/${habitId}`, {today}).then(res => res).catch(console.error, 'Error');
+    this.setState({wasClicked: !this.state.wasClicked})
 }
 
     render() {
-        const {habits} = this.state;
+        const {habits, wasClicked} = this.state;
         return (
             <div>
                 <HabitsContainer>
                     {habits.map(habit => {
-                        return <Habit habit={habit} key={habit.id} handleClick={this.handleClick}/>
+                        return <Habit habit={habit} key={habit.id} handleClick={this.handleClick} clicked={wasClicked}/>
                     })}
                     {this.state.habits.length < 6 ? <Link to='/add-habit'><AddHabit /></Link>: null}
                 </HabitsContainer>

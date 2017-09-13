@@ -11,7 +11,7 @@ module.exports={
     },
     getCheckins: (req, res) => {
         const db = req.app.get('db');
-        db.check_ins.count({habit_id: req.params.habitid}).then(total => res.status(200).send(total)).catch(console.error, 'Error');
+        db.check_ins.find({habit_id: req.params.habitid}, {columns: ['checkin_at']}).then(allCheckins => res.status(200).send(allCheckins)).catch(console.error, 'Error');
     },
     addHabit: (req, res) => {
         const db = req.app.get('db');
