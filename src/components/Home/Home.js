@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import moment from 'moment';
 
 import Habit from './Habit';
 import AddHabit from './AddHabit';
@@ -11,10 +12,25 @@ class Home extends Component {
     constructor() {
         super();
         this.state={
-            habits: []
+            habits: [],
+            today: moment()
         }
         this.handleClick = this.handleClick.bind(this);
     }
+
+componentWillMount() {
+    // check streaks for user by id
+    const {today} = this.state;
+    axios.get(`api/checkStreaks/${2}`).then(res => {
+        const checkInsToChange = res.data.filter(checkIn => {
+            if (today.diff(checkIn.checkin_at, 'days') > 1 ) {
+                return checkIn.habit_id*1;
+            }
+        });
+        console.log(checkInsToChange);
+    })
+    .catch(console.error, 'Error');
+}
 
 componentDidMount() {
     axios.get('/api/getHabits/2').then(res => {
@@ -23,19 +39,11 @@ componentDidMount() {
 }
 
 handleClick(habitId) {
-    const now = new Date();
     // axios.post(`./api/checkIn/${habitId}`, now).then(res => res).catch(console.error, 'Error');
 }
 
-mouseEnter() {
-    this.setState({isMouseInside: true});
-}
-mouseExit () {
-    this.setState({isMouseInside: false});
-}
-
     render() {
-        const {habits, isMouseInside} = this.state;
+        const {habits} = this.state;
         return (
             <div>
                 <HabitsContainer>

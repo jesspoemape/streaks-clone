@@ -12,6 +12,7 @@ massive(config.connectionString).then(db => app.set('db', db));
 app.get('/api/getHabits/:userid', sc.getHabits);
 app.get('/api/getHabit/:habitid', sc.getHabit);
 app.get('/api/getCheckins/:habitid', sc.getCheckins);
+app.get('/api/checkStreaks/:userid', sc.checkStreaks);
 
 app.post('/api/addHabit', sc.addHabit);
 
