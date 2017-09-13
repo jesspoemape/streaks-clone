@@ -16,6 +16,8 @@ app.get('/api/checkStreaks/:userid', sc.checkStreaks);
 
 app.post('/api/addHabit', sc.addHabit);
 
+app.put('/api/updateStreakStartDate', sc.updateStreakStartDate);
+
 
 
 app.listen(3001, () => console.log('Listening on port 3001'));

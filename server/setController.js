@@ -31,7 +31,12 @@ module.exports={
             where user_id = ${2} and active = true`)
             .then(results => res.status(200).send(results) )
             .catch(console.error, 'Error');
+    },
+    updateStreakStartDate: (req, res) => {
+        const db = req.app.get('db');
+        const {today, checkInsToChange} = req.body;
+        // db.run(`update habits set current_streak_start_date = ${today} where id = any(array${checkInsToChange})`)
 
-
+        db.habits.update({id: checkInsToChange, current_streak_start_date: today}).then(res => res).catch(console.error, 'Error');
     }
 }
