@@ -51,7 +51,7 @@ class Home extends Component {
         const {userInput, selectedDays} = this.state;
         return (
             <div>
-                <Header title={'Add a habit'}/>
+                <Link to='/'><Header title={'Add a habit'}/></Link>
                 <Container>
                     <Label>Enter habit name.</Label>
                     <Input value={userInput} onChange={e => this.handleChange(e)}/>
