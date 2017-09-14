@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import moment from 'moment';
 
 import Habit from './Habit';
+import CompletedHabit from './CompletedHabit';
 import AddHabit from './AddHabit';
 import Footer from './Footer';
 
@@ -14,7 +15,7 @@ class Home extends Component {
         this.state={
             habits: [],
             today: moment(),
-            wasClicked: false
+            checkedInHabits: []
         }
         this.handleClick = this.handleClick.bind(this);
     }
@@ -55,19 +56,27 @@ componentDidMount() {
 }
 
 handleClick(habitId) {
-    // const {today} = this.state;
+    const {today, checkedInHabits} = this.state;
     // axios.post(`/api/checkIn/${habitId}`, {today}).then(res => res).catch(console.error, 'Error');
-    this.setState({wasClicked: !this.state.wasClicked})
+    if (!checkedInHabits.includes(habitId)) {
+        this.setState({checkedInHabits: [...checkedInHabits, habitId]})
+    }
 }
 
     render() {
-        const {habits, wasClicked} = this.state;
+        const {habits, checkedInHabits} = this.state;
+        const mappedHabits = habits.map((habit, i) => {
+            if (!checkedInHabits.includes(habit.id)) {
+                return <Habit habit={habit} key={i} handleClick={this.handleClick}/>
+            }
+            else {
+                return <CompletedHabit habit={habit} key={i} />
+            }
+        });
         return (
             <div>
                 <HabitsContainer>
-                    {habits.map(habit => {
-                        return <Habit habit={habit} key={habit.id} handleClick={this.handleClick} clicked={wasClicked}/>
-                    })}
+                    {mappedHabits}
                     {this.state.habits.length < 6 ? <Link to='/add-habit'><AddHabit /></Link>: null}
                 </HabitsContainer>
                 <Footer/>
