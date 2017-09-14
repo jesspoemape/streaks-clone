@@ -26,13 +26,18 @@ componentWillMount() {
     // if so, do nothing
     // if not, reset the current streak start date
 
-    const {today} = this.state;
+    const {today, checkedInHabits} = this.state;
     axios.get(`api/checkStreaks/${2}`).then(res => {
         const checkInsToChange = [];
         res.data.forEach(checkIn => {
             let lastCheckin = moment(checkIn.checkin_at);
-            if (today.diff(lastCheckin, 'days') > 1 ) {
+            // if the last checkin was not today, change streak start date
+            if (!lastCheckin.isSame(today, 'day')) {
                 checkInsToChange.push(checkIn.habit_id);
+            }
+            // if the last checkinw as today, add it to the checked in array by id
+            if (lastCheckin.isSame(today, 'day')) {
+                this.setState({checkedInHabits: [...checkedInHabits, checkIn.habit_id]})
             }
         });
         
@@ -57,7 +62,7 @@ componentDidMount() {
 
 handleClick(habitId) {
     const {today, checkedInHabits} = this.state;
-    // axios.post(`/api/checkIn/${habitId}`, {today}).then(res => res).catch(console.error, 'Error');
+    axios.post(`/api/checkIn/${habitId}`, {today}).then(res => res).catch(console.error, 'Error');
     if (!checkedInHabits.includes(habitId)) {
         this.setState({checkedInHabits: [...checkedInHabits, habitId]})
     }
@@ -70,7 +75,7 @@ handleClick(habitId) {
                 return <Habit habit={habit} key={i} handleClick={this.handleClick}/>
             }
             else {
-                return <CompletedHabit habit={habit} key={i} />
+                return <CompletedHabit habit={habit} key={i}/>
             }
         });
         return (
