@@ -9,13 +9,13 @@ const Days = ({days, addDay}) => {
                 <Label> {days.toString()}</Label>
             </LabelContainer>
             <DaysContainer>
-                <Day onClick={() => addDay('Su')}>Su</Day>
-                <Day onClick={() => addDay('M')}>M</Day>
-                <Day onClick={() => addDay('Tu')}>Tu</Day>
-                <Day onClick={() => addDay('W')}>W</Day>
-                <Day onClick={() => addDay('Th')}>Th</Day>
-                <Day onClick={() => addDay('F')}>F</Day>
-                <Day onClick={() => addDay('Sa')}>Sa</Day>
+                {days.includes('Su') ? <SelectedDay onClick={() => addDay('Su')} >Su</SelectedDay> : <Day onClick={() => addDay('Su')}>Su</Day>}
+                {days.includes('M') ? <SelectedDay onClick={() => addDay('M')} >M</SelectedDay> : <Day onClick={() => addDay('M')}>M</Day>}
+                {days.includes('Tu') ? <SelectedDay onClick={() => addDay('Tu')} >Tu</SelectedDay> : <Day onClick={() => addDay('Tu')}>Tu</Day>}
+                {days.includes('W') ? <SelectedDay onClick={() => addDay('W')} >W</SelectedDay> : <Day onClick={() => addDay('W')}>W</Day>}
+                {days.includes('Th') ? <SelectedDay onClick={() => addDay('Th')} >Th</SelectedDay> : <Day onClick={() => addDay('Th')}>Th</Day>}
+                {days.includes('F') ? <SelectedDay onClick={() => addDay('F')} >F</SelectedDay> : <Day onClick={() => addDay('F')}>F</Day>}
+                {days.includes('Sa') ? <SelectedDay onClick={() => addDay('Sa')} >Sa</SelectedDay> : <Day onClick={() => addDay('Sa')}>Sa</Day>}
             </DaysContainer>
         </MainContainer>
     );
@@ -55,4 +55,15 @@ const Day = styled.div`
     align-items: center;
     margin: 0 3px;
     color: #C4573A;
+`
+const SelectedDay = styled.div`
+    background-color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 3px;
+    color: #7F3826;
 `

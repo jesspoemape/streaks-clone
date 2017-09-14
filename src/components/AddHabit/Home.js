@@ -21,12 +21,17 @@ class Home extends Component {
     }
 
     addDay(day) {
-        if (this.state.selectedDays.includes(day)) {
-            return this.state.selectedDays;
+        const {selectedDays} = this.state
+        if (!selectedDays.includes(day)) {
+            this.setState({
+                selectedDays: [...selectedDays, day]
+            });
         }
         else {
+            const dayIndex = selectedDays.indexOf(day);
+            const splicedDays = [...selectedDays.slice(0, dayIndex), ...selectedDays.slice(dayIndex+1)];
             this.setState({
-                selectedDays: [...this.state.selectedDays, day]
+                selectedDays: splicedDays
             });
         }
     }
