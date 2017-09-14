@@ -6,12 +6,12 @@ import {Link} from 'react-router-dom';
 import trash from './../../assets/trash.svg';
 import back from './../../assets/back.svg';
 
-const Footer = ({handleDelete}) => {
+const Footer = ({openModal}) => {
     return (
         <Container>
             <Link to='/settings'><MenuItem path={back}/></Link>
             <AppName>Streaks.</AppName>
-            <Link to='/'><MenuItem path={trash} callback={ svg => svg.addEventListener("click", handleDelete) }/></Link>
+            <MenuItem path={trash} callback={ svg => svg.addEventListener("click", openModal) }/>
         </Container>
     );
 };

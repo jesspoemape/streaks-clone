@@ -11,6 +11,7 @@ import BasicStats from './BasicStats';
 import StatsByDay from './StatsByDay';
 import StatsByTime from './StatsByTime';
 import Footer from './Footer';
+import DeleteModal from './DeleteModal';
 
 class Home extends Component {
     constructor() {
@@ -20,11 +21,14 @@ class Home extends Component {
             checkinCount: 0,
             checkins: [],
             checkInsByDay: [],
-            checkInsByHour: []
+            checkInsByHour: [],
+            modal: false
         }
 
         this.countOccurences = this.countOccurences.bind(this);
-        this.handleDelete = this.handleDelete.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this.deleteHabit = this.deleteHabit.bind(this);
     }
 
 componentDidMount() {
@@ -56,14 +60,23 @@ countOccurences(arr) {
     }
     return obj;
 }
-handleDelete() {
+openModal() {
+    const {modal} = this.state;
+    this.setState({modal: true});
+}
+
+closeModal() {
+    const {modal} = this.state;
+    this.setState({modal: false});
+}
+
+deleteHabit() {
     const habitid = this.props.match.params.id;
-    alert('Are you sure you want to delete?')
     // axios.put(`/api/archiveHabit/${habitid}`).then(res => res).catch(console.error, 'Error');
 }
 
     render() {
-        const {habit, checkinCount, checkInsByDay, checkInsByHour} = this.state;
+        const {habit, checkinCount, checkInsByDay, checkInsByHour, modal} = this.state;
         const startDate = moment(habit.date_created).format('ll');
         const currentStreakStartDate = moment(habit.current_streak_start_date);
         const currentDate = moment();
@@ -76,6 +89,7 @@ handleDelete() {
         return (
             <MainContainer>
             <Container>
+                <DeleteModal modal={modal ? true : false} deleteHabit={this.deleteHabit} closeModal={this.closeModal}/>
                 <IconContainer>
                     <Icon path={book}/>
                 </IconContainer>
@@ -88,7 +102,7 @@ handleDelete() {
                     <StatsByTime stats={statsByTimeObj}/>
                 </StatsContainer>
             </Container>
-            <Footer handleDelete={this.handleDelete}/>
+            <Footer openModal={this.openModal}/>
             </MainContainer>
         );
     }
