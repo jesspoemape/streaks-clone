@@ -26,7 +26,7 @@ const Container = styled.div`
     border-top: 2px solid #ff987c;
     height: 50px;
     margin-top: 30px;
-    padding: 20px;
+    padding: 20px 0;
     display: flex;
     justify-content: space-around;
 `

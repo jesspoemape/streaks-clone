@@ -5,10 +5,12 @@ import axios from 'axios';
 import moment from 'moment';
 
 import book from './../../assets/book.svg';
+
 import StatsOverTime from './StatsOverTime';
 import BasicStats from './BasicStats';
 import StatsByDay from './StatsByDay';
 import StatsByTime from './StatsByTime';
+import Footer from './Footer';
 
 class Home extends Component {
     constructor() {
@@ -22,6 +24,7 @@ class Home extends Component {
         }
 
         this.countOccurences = this.countOccurences.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
 componentDidMount() {
@@ -53,6 +56,9 @@ countOccurences(arr) {
     }
     return obj;
 }
+handleDelete() {
+console.log("DELETE")
+}
 
     render() {
         const {habit, checkinCount, checkInsByDay, checkInsByHour} = this.state;
@@ -63,8 +69,10 @@ countOccurences(arr) {
         const streakLengthInDays = currentDate.diff(currentStreakStartDate, 'days');
         const totalDays = currentDate.diff(startDate, 'days');
         const statsByDayObj = this.countOccurences(checkInsByDay);
-        const statsByTimeObj = this.countOccurences(checkInsByHour);;
+        const statsByTimeObj = this.countOccurences(checkInsByHour);
+
         return (
+            <MainContainer>
             <Container>
                 <IconContainer>
                     <Icon path={book}/>
@@ -78,17 +86,25 @@ countOccurences(arr) {
                     <StatsByTime stats={statsByTimeObj}/>
                 </StatsContainer>
             </Container>
+            <Footer handleDelete={this.handleDelete}/>
+            </MainContainer>
         );
     }
 }
 
 export default Home;
 
-const Container = styled.div`
+const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 25px;
+`
+const Container = styled.div`
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
 `
 const IconContainer = styled.div`
     background-color: white;
@@ -124,4 +140,5 @@ const StatsContainer = styled.div`
     display: flex;
     width: 100%;
     justify-content: space-evenly;
+    margin-bottom: 15px;
 `

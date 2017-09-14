@@ -3,15 +3,15 @@ import styled from 'styled-components';
 import ReactSVG from 'react-svg';
 import {Link} from 'react-router-dom';
 
-import settings from './../../assets/settings.svg';
-import calendar from './../../assets/calendar.svg';
+import trash from './../../assets/trash.svg';
+import back from './../../assets/back.svg';
 
-const Footer = () => {
+const Footer = ({handleDelete}) => {
     return (
         <Container>
-            <Link to='/settings'><MenuItem path={settings}/></Link>
+            <Link to='/settings'><MenuItem path={back}/></Link>
             <AppName>Streaks.</AppName>
-            <MenuItem path={calendar}/>
+            <MenuItem path={trash} onClick={handleDelete}/>
         </Container>
     );
 };
@@ -24,8 +24,8 @@ const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     margin-top: 20px;
+    width: 90%;
 `
-
 const MenuItem = styled(ReactSVG)`
     width: 35px;
     fill: #E4D8D6;

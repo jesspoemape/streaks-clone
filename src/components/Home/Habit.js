@@ -1,8 +1,7 @@
 import React from 'react';
-import styled, {keyframes} from 'styled-components';
+import styled from 'styled-components';
 import ReactSVG from 'react-svg';
 import moment from 'moment';
-import {fadeIn} from 'react-animations';
 
 import book from './../../assets/book.svg';
 
@@ -24,8 +23,6 @@ const Habit = ({habit: {current_streak_start_date, habit_name, id}, handleClick}
 };
 
 export default Habit;
-
-const fader = keyframes`${fadeIn}`;
 
 const Container = styled.div`
     display: flex;

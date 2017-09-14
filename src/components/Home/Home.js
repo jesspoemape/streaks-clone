@@ -70,7 +70,7 @@ handleClick(habitId) {
                     })}
                     {this.state.habits.length < 6 ? <Link to='/add-habit'><AddHabit /></Link>: null}
                 </HabitsContainer>
-                <Footer />
+                <Footer/>
             </div>
             
         );
