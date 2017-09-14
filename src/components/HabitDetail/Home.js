@@ -61,18 +61,16 @@ countOccurences(arr) {
     return obj;
 }
 openModal() {
-    const {modal} = this.state;
     this.setState({modal: true});
 }
 
 closeModal() {
-    const {modal} = this.state;
     this.setState({modal: false});
 }
 
 deleteHabit() {
     const habitid = this.props.match.params.id;
-    // axios.put(`/api/archiveHabit/${habitid}`).then(res => res).catch(console.error, 'Error');
+    axios.put(`/api/archiveHabit/${habitid}`).then(res => res).catch(console.error, 'Error');
 }
 
     render() {
