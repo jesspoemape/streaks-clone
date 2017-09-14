@@ -57,7 +57,9 @@ countOccurences(arr) {
     return obj;
 }
 handleDelete() {
-console.log("DELETE")
+    const habitid = this.props.match.params.id;
+    alert('Are you sure you want to delete?')
+    // axios.put(`/api/archiveHabit/${habitid}`).then(res => res).catch(console.error, 'Error');
 }
 
     render() {

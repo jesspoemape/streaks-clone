@@ -11,7 +11,7 @@ const Footer = ({handleDelete}) => {
         <Container>
             <Link to='/settings'><MenuItem path={back}/></Link>
             <AppName>Streaks.</AppName>
-            <MenuItem path={trash} onClick={handleDelete}/>
+            <Link to='/'><MenuItem path={trash} callback={ svg => svg.addEventListener("click", handleDelete) }/></Link>
         </Container>
     );
 };

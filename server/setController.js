@@ -1,7 +1,7 @@
 module.exports={
     getHabits: (req, res) => {
         const db = req.app.get('db');
-        db.habits.find({user_id: req.params.userid}, {columns: ['id', 'habit_name', 'current_streak_start_date']})
+        db.habits.find({user_id: req.params.userid, active: true}, {columns: ['id', 'habit_name', 'current_streak_start_date']})
             .then(response => res.status(200).send(response)).catch(console.error, 'Error');        
     },
     getHabit: (req, res) => {
@@ -43,5 +43,12 @@ module.exports={
         db.check_ins.insert({habit_id: habitid, checkin_at: today})
             .then(response => res.status(200).send(response))
             .catch(console.error, 'Error');
+    },
+    archiveHabit: (req, res) => {
+        const db = req.app.get('db');
+
+        db.habits.update({id: req.params.habitid, active: false})
+        .then(response => res.status(200).send(response))
+        .catch(console.error, 'Error');
     }
 }

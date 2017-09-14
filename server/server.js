@@ -18,6 +18,7 @@ app.post('/api/addHabit', sc.addHabit);
 app.post('/api/checkIn/:habitid', sc.checkIn);
 
 app.put('/api/updateStreakStartDate', sc.updateStreakStartDate);
+app.put('/api/archiveHabit/:habitid', sc.archiveHabit)
 
 
 
