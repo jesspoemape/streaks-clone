@@ -29,20 +29,19 @@ componentDidMount() {
     axios.get(`/api/getHabit/${habitid}`).then(res => this.setState({habit: res.data[0]})).catch(console.error, 'Error');
     axios.get(`/api/getCheckins/${habitid}`)
     .then(res => {
-        // for number of completions
-        this.setState({checkinCount: res.data.length, checkins: res.data});
 
         // for checkins by day
-        const checkInsByDay = this.state.checkins.map(checkin => {
+        const checkInsByDay = res.data.map(checkin => {
             return moment(checkin.checkin_at).day();
         });
-        this.setState({checkInsByDay});
 
         // for checkins by hour
-        const checkInsByHour = this.state.checkins.map(checkin => {
+        const checkInsByHour = res.data.map(checkin => {
             return moment(checkin.checkin_at).hour();
         });
-        this.setState({checkInsByHour});
+
+        // .length for number of completions
+        this.setState({checkInsByHour, checkInsByDay, checkinCount: res.data.length, checkins: res.data});
 
     }).catch(console.error, 'Error');   
 }
@@ -65,7 +64,6 @@ countOccurences(arr) {
         const totalDays = currentDate.diff(startDate, 'days');
         const statsByDayObj = this.countOccurences(checkInsByDay);
         const statsByTimeObj = this.countOccurences(checkInsByHour);;
-
         return (
             <Container>
                 <IconContainer>
