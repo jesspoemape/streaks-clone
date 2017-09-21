@@ -2,11 +2,43 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
 import moment from 'moment';
+import IconFinder from './../Shared/IconFinder';
 
 import book from './../../assets/book.svg';
+import cat from './../../assets/cat.svg';
+import dog from './../../assets/dog.svg';
+import feet from './../../assets/feet.svg';
+import tooth from './../../assets/tooth.svg';
+import hand from './../../assets/hand.svg';
+import star from './../../assets/star.svg';
 
 const Habit = ({habit: {current_streak_start_date, habit_name, id}, handleClick}) => {
+    function iconFinder(habit_name) {
+        let name = habit_name.toLowerCase();
+            if (name.includes('cat')) {
+                return cat;
+            }
+            else if (name.includes('dog')) {
+                return dog;
+            }
+            else if (name.includes('hand') || name.includes('finger')) {
+                return hand;
+            }
+            else if (name.includes('foot') || name.includes('feet') || name.includes('walk') || name.includes('run')) {
+                return feet;
+            }
+            else if (name.includes('book') || name.includes('read')) {
+                return book;
+            }
+            else if (name.includes('tooth') || name.includes('teeth') || name.includes('floss')) {
+                return tooth;
+            }
+            else {
+                return star;
+            }
+    }
 
+    let icon = iconFinder(habit_name);
     let cssd = moment(current_streak_start_date);
     let cd = moment(new Date());
     let streakLengthInDays = cd.diff(cssd, 'days');
@@ -14,7 +46,7 @@ const Habit = ({habit: {current_streak_start_date, habit_name, id}, handleClick}
     return (
         <Container onClick={() => handleClick(id)}>
             <HabitWrapper>
-                <Icon path={book}/>
+                <Icon path={icon}/>
                 <StreakLength>{streakLengthInDays}</StreakLength>
             </HabitWrapper>
             <Name>{habit_name}</Name>
