@@ -28,22 +28,24 @@ componentWillMount() {
 
     const {today, checkedInHabits} = this.state;
     axios.get(`api/checkStreaks/${2}`).then(res => {
-        const checkInsToChange = [];
+        const checkInsToChangeTempArr = [];
+        const checkedInHabitsTempArr = [];
         res.data.forEach(checkIn => {
             let lastCheckin = moment(checkIn.checkin_at);
             // if the last checkin was not today, change streak start date
             if (!lastCheckin.isSame(today, 'day')) {
-                checkInsToChange.push(checkIn.habit_id);
+                checkInsToChangeTempArr.push(checkIn.habit_id);
             }
-            // if the last checkinw as today, add it to the checked in array by id
+            // if the last checkin was today, add it to the checked in array by id
             if (lastCheckin.isSame(today, 'day')) {
-                this.setState({checkedInHabits: [...checkedInHabits, checkIn.habit_id]})
+                checkedInHabitsTempArr.push(checkIn.habit_id);
+                this.setState({checkedInHabits: checkedInHabitsTempArr})
             }
         });
         
         // send reset the current streak start date
-        if (checkInsToChange.length > 0) {
-            axios.put(`/api/updateStreakStartDate`, {checkInsToChange, today})
+        if (checkInsToChangeTempArr.length > 0) {
+            axios.put(`/api/updateStreakStartDate`, {checkInsToChangeTempArr, today})
             .then(res => {
                 axios.get(`/api/getHabits/${2}`).then(res => {
                     this.setState({habits: res.data})
