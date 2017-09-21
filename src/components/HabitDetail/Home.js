@@ -5,6 +5,12 @@ import axios from 'axios';
 import moment from 'moment';
 
 import book from './../../assets/book.svg';
+import cat from './../../assets/cat.svg';
+import dog from './../../assets/dog.svg';
+import feet from './../../assets/feet.svg';
+import tooth from './../../assets/tooth.svg';
+import hand from './../../assets/hand.svg';
+import star from './../../assets/star.svg';
 
 import StatsOverTime from './StatsOverTime';
 import BasicStats from './BasicStats';
@@ -29,6 +35,7 @@ class Home extends Component {
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
         this.deleteHabit = this.deleteHabit.bind(this);
+        this.findIcon = this.findIcon.bind(this);
     }
 
 componentDidMount() {
@@ -72,26 +79,53 @@ deleteHabit() {
     const habitid = this.props.match.params.id;
     axios.put(`/api/archiveHabit/${habitid}`).then(res => res).catch(console.error, 'Error');
 }
+findIcon(habitName = 'habit') {
+let name = habitName.toLowerCase();
+    if (name.includes('cat')) {
+        return cat;
+    }
+    else if (name.includes('dog')) {
+        return dog;
+    }
+    else if (name.includes('hand') || name.includes('finger')) {
+        return hand;
+    }
+    else if (name.includes('foot') || name.includes('feet') || name.includes('walk') || name.includes('run')) {
+        return feet;
+    }
+    else if (name.includes('book') || name.includes('read')) {
+        return book;
+    }
+    else if (name.includes('tooth') || name.includes('teeth') || name.includes('floss')) {
+        return tooth;
+    }
+    else {
+        return star;
+    }
+}
 
     render() {
-        const {habit, checkinCount, checkInsByDay, checkInsByHour, modal} = this.state;
-        const startDate = moment(habit.date_created).format('ll');
-        const currentStreakStartDate = moment(habit.current_streak_start_date);
+        const {habit: {habit_name, date_created, current_streak_start_date}, checkinCount, checkInsByDay, checkInsByHour, modal} = this.state;
+
+
+        const startDate = moment(date_created).format('ll');
+        const currentStreakStartDate = moment(current_streak_start_date);
         const currentDate = moment();
         const allTimeAvg = (checkinCount/(currentDate.diff(startDate, 'days')))*100; 
         const streakLengthInDays = currentDate.diff(currentStreakStartDate, 'days');
         const totalDays = currentDate.diff(startDate, 'days');
         const statsByDayObj = this.countOccurences(checkInsByDay);
         const statsByTimeObj = this.countOccurences(checkInsByHour);
+        const icon = this.findIcon(habit_name)
 
         return (
             <MainContainer>
             <Container>
                 <DeleteModal modal={modal ? true : false} deleteHabit={this.deleteHabit} closeModal={this.closeModal}/>
                 <IconContainer>
-                    <Icon path={book}/>
+                    <Icon path={icon}/>
                 </IconContainer>
-                <Name>{habit.habit_name ? habit.habit_name : 'habit name'}</Name>
+                <Name>{habit_name ? habit_name : 'habit name'}</Name>
                 <BasicStats streakLengthInDays={streakLengthInDays} allTimeAvg={allTimeAvg} checkinCount={checkinCount}/>
                 <StatsOverTime startDate={startDate} totalDays={totalDays}/>
                 <Label>Completions</Label>

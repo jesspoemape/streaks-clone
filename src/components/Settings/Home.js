@@ -6,6 +6,7 @@ import {Link} from 'react-router-dom';
 
 import notify from './../../assets/notify.svg';
 import plus from './../../assets/plus.svg';
+import star from './../../assets/star.svg';
 import help from './../../assets/help.svg';
 import support from './../../assets/support.svg';
 import Header from './../Shared/Header.js';
@@ -33,7 +34,7 @@ render() {
                 {this.state.habits.map(habit => {
                     return (<Link to={`/habit-detail/${habit.id}`} key={habit.id}><Card>
                         <IconContainer>
-                            <Icon path={help} />
+                            <Icon path={star} />
                         </IconContainer>
                         {habit.habit_name}
                     </Card></Link>)

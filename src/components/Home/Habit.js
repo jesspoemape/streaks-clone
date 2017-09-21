@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
 import moment from 'moment';
-import IconFinder from './../Shared/IconFinder';
 
 import book from './../../assets/book.svg';
 import cat from './../../assets/cat.svg';
@@ -13,7 +12,7 @@ import hand from './../../assets/hand.svg';
 import star from './../../assets/star.svg';
 
 const Habit = ({habit: {current_streak_start_date, habit_name, id}, handleClick}) => {
-    function iconFinder(habit_name) {
+    function findIcon(habit_name) {
         let name = habit_name.toLowerCase();
             if (name.includes('cat')) {
                 return cat;
@@ -38,7 +37,7 @@ const Habit = ({habit: {current_streak_start_date, habit_name, id}, handleClick}
             }
     }
 
-    let icon = iconFinder(habit_name);
+    let icon = findIcon(habit_name);
     let cssd = moment(current_streak_start_date);
     let cd = moment(new Date());
     let streakLengthInDays = cd.diff(cssd, 'days');
