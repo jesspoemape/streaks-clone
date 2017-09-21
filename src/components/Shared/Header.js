@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
+import {Link} from 'react-router-dom';
 
 import back from './../../assets/back.svg';
 
 const Header = ({title}) => {
     return (
         <Container>
-            <BackArrow path={back}/>
+            <Link to='/'><BackArrow path={back}/></Link>
             <Title>{title}</Title>
         </Container>
     );

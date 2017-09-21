@@ -4,17 +4,49 @@ import ReactSVG from 'react-svg';
 import moment from 'moment';
 
 import book from './../../assets/book.svg';
+import cat from './../../assets/cat.svg';
+import dog from './../../assets/dog.svg';
+import feet from './../../assets/feet.svg';
+import tooth from './../../assets/tooth.svg';
+import hand from './../../assets/hand.svg';
+import star from './../../assets/star.svg';
 
 const Habit = ({habit: {current_streak_start_date, habit_name, id}}) => {
+
+        function findIcon(habit_name) {
+        let name = habit_name.toLowerCase();
+            if (name.includes('cat')) {
+                return cat;
+            }
+            else if (name.includes('dog')) {
+                return dog;
+            }
+            else if (name.includes('hand') || name.includes('finger')) {
+                return hand;
+            }
+            else if (name.includes('foot') || name.includes('feet') || name.includes('walk') || name.includes('run')) {
+                return feet;
+            }
+            else if (name.includes('book') || name.includes('read')) {
+                return book;
+            }
+            else if (name.includes('tooth') || name.includes('teeth') || name.includes('floss')) {
+                return tooth;
+            }
+            else {
+                return star;
+            }
+    }
 
     let cssd = moment(current_streak_start_date);
     let cd = moment(new Date());
     let streakLengthInDays = cd.diff(cssd, 'days');
+    const icon = findIcon(habit_name)
     
     return (
         <Container >
             <HabitWrapper>
-                <Icon path={book}/>
+                <Icon path={icon}/>
                 <StreakLength>{streakLengthInDays}</StreakLength>
             </HabitWrapper>
             <Name>{habit_name}</Name>
