@@ -105,7 +105,7 @@ let name = habitName.toLowerCase();
 }
 
     render() {
-        const {habit: {habit_name, date_created, current_streak_start_date}, checkinCount, checkInsByDay, checkInsByHour, modal} = this.state;
+        const {habit: {habit_name, date_created, current_streak_start_date}, checkinCount, checkInsByDay, checkInsByHour, modal, checkins} = this.state;
 
 
         const startDate = moment(date_created).format('ll');
@@ -127,7 +127,7 @@ let name = habitName.toLowerCase();
                 </IconContainer>
                 <Name>{habit_name ? habit_name : 'habit name'}</Name>
                 <BasicStats streakLengthInDays={streakLengthInDays} allTimeAvg={allTimeAvg} checkinCount={checkinCount}/>
-                <StatsOverTime startDate={startDate} totalDays={totalDays}/>
+                <StatsOverTime startDate={startDate} totalDays={totalDays} checkins={checkins}/>
                 <Label>Completions</Label>
                 <StatsContainer>
                     <StatsByDay stats={statsByDayObj}/>

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Line} from 'react-chartjs-2';
 import styled from 'styled-components';
+import moment from 'moment';
 
 const data = {
   labels: ["","","","","","","","","","","","","","",""],
@@ -47,7 +48,32 @@ const options = {
     maintainAspectRatio: false
 };
 
-const StatsOverTime = ({startDate, totalDays}) => {
+// loop for total number of possible days
+// - if there was a checkin on that day, 
+//     - numofcheckins++
+// divide num of checkins/(index+1)
+// push that value to the results array
+
+const StatsOverTime = ({startDate, totalDays, checkins}) => {
+    console.log('CHECKINS', checkins)
+    const totalCheckins = checkins.length;
+    let resultsArr = [];
+    let currentNumOfCheckins = 0;
+    
+    for (let i = 0; i < totalCheckins; i++) {
+        // console.log(resultsArr)
+        let startDateMoment = moment(startDate).add(currentNumOfCheckins + i, 'days');
+        console.log(startDateMoment._d)
+        let checkinMoment = moment(checkins[i].checkin_at);
+        // console.log('DATE',startDateMoment._d, 'CHECKIN', checkinMoment._d);
+        if (checkinMoment.diff(startDateMoment, 'days') === 0) {
+            console.log('CHECKIN');
+            currentNumOfCheckins++;
+        }
+            let average = currentNumOfCheckins/resultsArr.length
+            resultsArr.push(average);
+    }
+
     return (
         <Container>
             <Line data={data} options={options} width={375} height={75}/>
