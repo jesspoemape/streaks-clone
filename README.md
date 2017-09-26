@@ -1,6 +1,6 @@
 ## Introduction
 ### About the project
-This SPA is a clone of the Streaks app: a place to track your progress on forming good habits. 
+This SPA is a clone of the Streaks app: a place to track your progress on forming good habits. The user can pick up to 6 habits to track progress of. As the user checks in every day, their streak increases. If the user misses a day, their streak resets back to zero.
 * [Live site: Coming Soon!] 
 
 ### 1. Front-End
@@ -10,7 +10,7 @@ This SPA is a clone of the Streaks app: a place to track your progress on formin
   * User can remove habits from their list of habits
   * User can click on the habit to confirm its completion
   * Users can see their current streak and longest streak for each habit
-  * Users can see detailed statistics for each habit (average checkins, total checkins, checkins by day, checkins by time, and checkins over time)
+  * Users can see detailed statistics for each habit (average check ins, total check ins, check ins by day, check ins by time, and check ins over time)
 
 #### 1.2 Technologies
   * HTML/CSS
@@ -29,11 +29,7 @@ This SPA is a clone of the Streaks app: a place to track your progress on formin
     * Massive
 
 ### 3. Screenshots
-  * [Home - Desktop]
   * [Home - Mobile]
-  * [Settings - Desktop]
   * [Settings - Mobile]
-  * [Habit Detail - Desktop]
   * [Habit Detail - Mobile]
-  * [Add Habit - Desktop]
   * [Add Habit - Mobile]
